@@ -1,0 +1,12 @@
+.git
+__pycache__/
+*.py[cod]
+.venv
+.env
+
+input/*.csv
+output
+data
+*.cbm
+*.pkl
+*.joblib

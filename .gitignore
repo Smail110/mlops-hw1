@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+input/*.csv
+output/*
+!output/.gitkeep
+
+data/
+*.cbm
+*.pkl
+*.joblib
+
+.DS_Store
