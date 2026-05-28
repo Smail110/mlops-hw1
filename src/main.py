@@ -5,13 +5,12 @@ from src.config import DEFAULT_INPUT_PATH, DEFAULT_MODEL_PATH, DEFAULT_OUTPUT_DI
 from src.load_data import load_input
 from src.predict import score_dataset
 from src.preprocess import preprocess_dataset
+from src.reporting import save_prediction_density, save_top_feature_importances
 from src.save_submission import save_submission
 
 
 LEGACY_OUTPUTS = [
     "prediction_scores.csv",
-    "feature_importances.json",
-    "prediction_density.png",
 ]
 
 
@@ -24,12 +23,16 @@ def run(input_path: Path, output_dir: Path, model_path: Path) -> None:
 
     raw_data = load_input(input_path)
     prepared_data = preprocess_dataset(raw_data)
-    predictions, _, _ = score_dataset(prepared_data, model_path)
+    predictions, scores, model = score_dataset(prepared_data, model_path)
 
     save_submission(predictions, output_dir / "sample_submission.csv")
+    save_top_feature_importances(model, output_dir / "feature_importances.json")
+    save_prediction_density(scores, output_dir / "prediction_density.png")
 
     print(f"Rows scored: {len(predictions)}")
     print(f"Submission saved to: {output_dir / 'sample_submission.csv'}")
+    print(f"Feature importances saved to: {output_dir / 'feature_importances.json'}")
+    print(f"Prediction density saved to: {output_dir / 'prediction_density.png'}")
 
 
 def parse_args() -> argparse.Namespace:

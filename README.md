@@ -11,6 +11,7 @@ src/load_data.py        # загрузка входного test.csv
 src/preprocess.py       # feature engineering
 src/predict.py          # загрузка модели и скоринг
 src/save_submission.py  # сохранение sample_submission.csv
+src/reporting.py        # feature importances и график плотности скоров
 src/main.py             # запуск всего inference pipeline
 models/                 # компактная обученная модель
 ```
@@ -38,10 +39,12 @@ pip install -r requirements.txt
 python -m src.main
 ```
 
-После запуска в `output` появится Kaggle-файл:
+После запуска в `output` появятся:
 
 ```text
 sample_submission.csv
+feature_importances.json
+prediction_density.png
 ```
 
 ## Docker
